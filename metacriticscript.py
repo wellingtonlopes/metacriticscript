@@ -1,4 +1,5 @@
 import requests
+from config import api_headers, api_querystring, api_url
 from openpyxl import Workbook
 
 text = open("gameslist.txt", "r")
@@ -23,16 +24,11 @@ def convert_to_games(text):
 
 games = convert_to_games(text)
 
-urls = ["https://chicken-coop.p.rapidapi.com/games/" + game for game in games]
+urls = [ api_url + game for game in games]
 
-querystring = { 
-                "platform":"pc",
-                }
+querystring = api_querystring
 
-headers = {
-    'x-rapidapi-host': "chicken-coop.p.rapidapi.com",
-    'x-rapidapi-key': "85c0481f7amsh909e100ef71325fp14744cjsn98dffd5fa4dc"
-    }
+headers = api_headers
 
 
 def write_scores(list_of_urls):
